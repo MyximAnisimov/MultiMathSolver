@@ -1,10 +1,14 @@
 package app.multimathsolver.user;
 
 import app.multimathsolver.jwt.JwtUtils;
+import app.multimathsolver.kafka.UserRegisteredEvent;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -28,13 +32,16 @@ public class UserController {
     private PasswordEncoder passwordEncoder;
 
     @Autowired
+    private KafkaTemplate<String, String> kafkaTemplate;
+
+    @Autowired
     private RoleRepository roleRepository;
 
     @Autowired
     private AuthenticationManager authenticationManager;
 
     @PostMapping(path = "/registration", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<HttpStatus> registration(@RequestBody AuthDTO authDTO){
+    public ResponseEntity<HttpStatus> registration(@RequestBody AuthDTO authDTO) throws JsonProcessingException {
         if(userRepository.existsByEmail(authDTO.getEmail())){
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
@@ -44,7 +51,12 @@ public class UserController {
        Role roles = roleRepository.findByName("ROLE_USER").get();
        user.setRoles(Collections.singleton(roles));
        userRepository.save(user);
+        UserRegisteredEvent event = new UserRegisteredEvent();
+        event.email = authDTO.getEmail();
+        event.message = "Ваш аккаунт зарегистрирован!";
 
+        String json = new ObjectMapper().writeValueAsString(event);
+        kafkaTemplate.send("registration", json);
        return new ResponseEntity<>(HttpStatus.OK);
     }
 

@@ -8,6 +8,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.kafka.annotation.KafkaListener;
 
 @SpringBootApplication
 public class MultiMathSolverApplication {
@@ -15,13 +16,10 @@ public class MultiMathSolverApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(MultiMathSolverApplication.class, args);
 	}
-//    @Bean
-//    public CommandLineRunner demo(RoleRepository roleRepo) {
-//        return (args) -> {
-//            Role role=new Role();
-//            role.setName("ROLE_USER");
-//            roleRepo.save(role);
-//        };
-//    }
+
+//	@KafkaListener(topics="msg")
+//	public void msgListener(String msg){
+//		System.out.println(msg);
+//	}
 
 }

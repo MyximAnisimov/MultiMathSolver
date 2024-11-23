@@ -59,6 +59,7 @@ public class SecurityConfig{
                 .authorizeHttpRequests((authorize) -> authorize
                         .requestMatchers(HttpMethod.POST,"/user/**").permitAll()
                         .requestMatchers("/api/**").permitAll()
+                        .requestMatchers("/msg").permitAll()
                         .anyRequest().authenticated())
 //                .formLogin(Customizer.withDefaults())
                 .httpBasic(Customizer.withDefaults());
