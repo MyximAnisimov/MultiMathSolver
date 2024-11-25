@@ -20,5 +20,7 @@ public class CholetskyDAO {
 
     private String matrix;
 
+    private String vector;
+
 
 }

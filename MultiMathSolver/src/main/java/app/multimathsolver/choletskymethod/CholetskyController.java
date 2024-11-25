@@ -47,18 +47,23 @@ public class CholetskyController {
         List<Double> resultVector;
         try {
             List<List<Double>> matrixValues = new ArrayList<>();
-            String[] data = input.getMatrix().split("\n");
+            List<Double> vector = new ArrayList<>();
+            String[] arrMatrixValues = input.getMatrix().split("\n");
+            String[] arrVectorValues = input.getVector().split("\n");
             int n = input.getSize();
 
             for (int i = 0; i < n; i++) {
-                String[] row = data[i].split(" ");
+                String[] matrixRow = arrMatrixValues[i].split(" ");
+                vector.add(Double.parseDouble(arrVectorValues[i]));
                 matrixValues.add(i, new ArrayList<>());
-                for (int j = 0; j < n + 1; j++) {
-                    matrixValues.get(i).add(j, Double.parseDouble(row[j]));
+                for (int j = 0; j < n; j++) {
+                    matrixValues.get(i).add(j, Double.parseDouble(matrixRow[j]));
                 }
             }
 
-            resultVector = choletskyService.solveByCholeskyDecomposition(n, matrixValues);
+
+            resultVector = choletskyService.solveByCholeskyDecomposition(n, matrixValues, vector);
+            if(resultVector == null) return new ResponseEntity<>("Вы ввели некорректные данные!",HttpStatus.BAD_REQUEST);
             convertedResult = resultVector.toString();
         }
         catch(Exception e){

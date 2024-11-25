@@ -10,6 +10,7 @@ export default {
     return {
       size: "",
       matrix: "",
+      vector: "",
       result: ""
     };
   },
@@ -24,7 +25,8 @@ export default {
 
       apiClient.put('http://localhost:8080/api/choletsky', {
         size: this.size,
-        matrix: this.matrix
+        matrix: this.matrix,
+        vector: this.vector
       }, {
         headers: {
           "Authorization": "Bearer " + token,
@@ -66,6 +68,8 @@ export default {
           <input id="matrix-size" v-model="size" />
           <label for="matrix">Введите матрицу в соответствии с размером:</label>
           <textarea id="matrix" v-model="matrix" placeholder="Введите матрицу" class="no-resize"></textarea>
+          <label for="vector">Введите вектор B (каждое новое значение писать на новой строке)</label>
+          <textarea id="vector" v-model="vector" class="no-resize"></textarea>
           <ButtonRegLog color="white" style="color: black" label="Отправить данные" @click="sendMatrix"/>
         </form>
       </div>

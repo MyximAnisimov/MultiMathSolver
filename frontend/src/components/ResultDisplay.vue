@@ -1,7 +1,16 @@
 <template>
   <div class="result-container" v-if="results.length > 0">
     <h3>Результаты:</h3>
-    <p>{{results}}</p>
+
+    <h4>Вектор Y:</h4>
+    <ul>
+      <li v-for="(item, index) in firstHalf" :key="index">{{ item }}</li>
+    </ul>
+
+    <h4>Вектор X:</h4>
+    <ul>
+      <li v-for="(item, index) in secondHalf" :key="index">{{ item }}</li>
+    </ul>
   </div>
 </template>
 
@@ -9,8 +18,23 @@
 export default {
   props: {
     results: {
-      type: Array,
+      type: String,
       required: true
+    }
+  },
+  data() {
+    return {
+      resultsSplittedByComma: this.results.split(",").map(item => item.trim())
+    };
+  },
+  computed: {
+    firstHalf() {
+      const midIndex = Math.ceil(this.resultsSplittedByComma.length / 2);
+      return this.resultsSplittedByComma.slice(0, midIndex);
+    },
+    secondHalf() {
+      const midIndex = Math.ceil(this.resultsSplittedByComma.length / 2);
+      return this.resultsSplittedByComma.slice(midIndex);
     }
   }
 }

@@ -19,7 +19,7 @@ public class KafkaController {
         UserRegisteredEvent event = new ObjectMapper().readValue(json, UserRegisteredEvent.class);
         String userEmail = event.email;
         String message = event.message;
-        projectEmailService.sendSimpleMessage(userEmail, "Добро пожаловать!", message);
+        projectEmailService.sendSimpleMessage(userEmail, "Добро пожаловать на сайт MultiMathSolver!", message);
     }
 
 }
