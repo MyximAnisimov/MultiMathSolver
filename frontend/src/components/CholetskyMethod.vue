@@ -11,8 +11,18 @@ export default {
       size: "",
       matrix: "",
       vector: "",
-      result: ""
+      results: "",
+      items: []
     };
+  },
+  watch: {
+    results(newValue) {
+      if (newValue.trim() !== "") {
+        this.splitString();
+      } else {
+        this.items = [];
+      }
+    }
   },
   methods: {
     sendMatrix(e) {
@@ -40,7 +50,7 @@ export default {
               type: 'success'
             });
             localStorage.setItem("choletsky", response.data);
-            this.result = localStorage.getItem("choletsky");
+            this.results = localStorage.getItem("choletsky");
           })
           .catch(error => {
             this.AxiosErrorHandler(error.response.data);
@@ -53,6 +63,9 @@ export default {
         text: errorText,
         type: 'error'
       })
+    },
+    splitString() {
+      this.items = this.results.split(",");
     }
   }
 }
@@ -74,7 +87,14 @@ export default {
         </form>
       </div>
 
-      <ResultDisplay id="results" :results="result" />
+      <div class="result-container" id="results" v-if="items.length > 0">
+        <h3>Результаты:</h3>
+        <ul>
+          <li v-for="(item, index) in items" :key="index">
+            X{{ index + 1 }}: {{ item.trim() }}
+          </li>
+        </ul>
+      </div>
     </div>
   </section>
 </template>
@@ -91,23 +111,22 @@ export default {
   border-radius: 5px;
   padding: 20px;
   max-width: 600px;
-  margin: 0 auto; /* Центрируем контейнер */
+  margin: 0 auto;
 }
 
 #matrix-size {
   margin: 10px 0;
-  width: 100%; /* Занять всю ширину */
+  width: 100%;
 }
 
 textarea {
-  width: 100%; /* Занять всю ширину */
+  width: 100%;
   margin: 10px 0;
-  height: 100px; /* Фиксированная высота для textarea */
+  height: 100px;
 }
 
-/* Ограничиваем изменение размера текстовой области */
 .no-resize {
-  resize: none; /* Запретить изменение размера */
+  resize: none;
 }
 
 #results {
@@ -116,5 +135,28 @@ textarea {
   padding: 20px;
   max-width: 600px;
   margin: 20px;
+}
+.result-container {
+  margin-top: 20px;
+  padding: 15px;
+  border: 2px solid #ccc;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  white-space: normal;
+}
+
+.result-container h3 {
+  margin-bottom: 10px;
+}
+
+.result-container ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.result-container li {
+  margin: 5px 0;
 }
 </style>

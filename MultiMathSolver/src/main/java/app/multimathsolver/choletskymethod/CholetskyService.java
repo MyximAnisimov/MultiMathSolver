@@ -11,21 +11,6 @@ import java.util.List;
 class CholetskyService {
 
     public static boolean isSolutionExists = true;
-    public static String errorMessage = "The system has no roots of equations or has an infinite set of them.";
-
-//            public static boolean isInputMatrixCorrect(int n, List<List<Double>> inputMatrix){
-//        if(n != inputMatrix.size()){
-//            isSolutionExists = false;
-//            return isSolutionExists;
-//        }
-//        for(List<Double> oneLine : inputMatrix){
-//            if(oneLine.size() != n){
-//               isSolutionExists = false;
-//                break;
-//            }
-//        }
-//        return isSolutionExists;
-//    }
 
     private boolean isInputsCorrect(List<List<Double>> inputMatrix, List<Double> vectorB) {
         if (inputMatrix.size() != inputMatrix.get(0).size() || inputMatrix.size() != vectorB.size()) {
@@ -97,17 +82,6 @@ class CholetskyService {
 
         return true; // Успешно выполнено разложение, матрица положительно определена
     }
-//
-//    private Double[] getVectorB(List<List<Double>> inputMatrix) {
-//        Double[] vectorB = new Double[inputMatrix.size()];
-//
-//        for (int i = 0; i < inputMatrix.size(); i++) {
-//            for (int j = 0; j < inputMatrix.get(i).size(); j++) {
-//                if (j == inputMatrix.get(i).size() - 1) vectorB[i] = inputMatrix.get(i).get(j);
-//            }
-//        }
-//        return vectorB;
-//    }
 
     private void fillMatrixes(int n, List<List<Double>> inputMatrix, Double[][] matrixB, Double[][] matrixC){
         for(int i=0; i<n; i++){
@@ -233,7 +207,7 @@ class CholetskyService {
         Double[] vectorX = getCalculatedVector(matrixC, vectorY);
 
         List<Double> result = new ArrayList<>();
-        result.addAll(Arrays.stream(vectorY).toList());
+//        result.addAll(Arrays.stream(vectorY).toList());
         result.addAll(Arrays.stream(vectorX).toList());
         return result;
     }

@@ -18,8 +18,4 @@ export default {
 </template>
 
 <style scoped>
-#error-message{
-  //text-align: center;
-  //font-size: 100%;
-}
 </style>

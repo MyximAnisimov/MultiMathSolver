@@ -1,6 +1,6 @@
 <template>
   <div id="content">
-    <h1 class="greeting">Добро пожаловать на сайт-решатор по математике :)</h1> <!-- Добавленная надпись -->
+    <h1 class="greeting">Добро пожаловать на сайт-решатор по математике :)</h1>
 
     <div class="form-container">
       <form id="form">
@@ -103,23 +103,23 @@ export default {
 #content {
   display: flex;
   flex-direction: column;
-  align-items: center; /* Центрируем содержимое по горизонтали */
-  justify-content: flex-start; /* Содержимое остается в верхней части */
-  height: 100vh; /* Занять всю высоту видимой области */
+  align-items: center;
+  justify-content: flex-start;
+  height: 100vh;
 }
 
 .greeting {
   padding-top: 50px;
-  text-align: center; /* Центрируем текст */
-  font-size: 2em; /* Размер шрифта */
-  margin-bottom: 20px; /* Отступ снизу */
+  text-align: center;
+  font-size: 2em;
+  margin-bottom: 20px;
 }
 
 .form-container {
   padding-top: 100px;
   display: flex;
-  align-items: center; /* Центрируем форму по вертикали */
-  justify-content: center; /* Центрируем форму по горизонтали */
+  align-items: center;
+  justify-content: center;
   flex-direction: column;
 }
 
@@ -127,7 +127,7 @@ export default {
   position: relative;
   font-size: 20px;
   flex-direction: column;
-  margin: auto; /* Центрируем форму */
+  margin: auto;
   border-radius: 20px;
   padding: 20px;
   box-shadow: 0 0 10px 1px black;

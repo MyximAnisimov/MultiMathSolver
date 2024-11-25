@@ -29,9 +29,9 @@
 .methods-container {
   display: flex;
   flex-direction: column;
-  align-items: center; /* Центрируем список по горизонтали */
-  justify-content: center; /* Выравниваем по вертикали */
-  height: calc(100vh - 80px); /* Высота контейнера, вычитаем высоту заголовка */
+  align-items: center;
+  justify-content: center;
+  height: calc(100vh - 80px);
 }
 
 .methods-title {
@@ -42,29 +42,29 @@
 .methods-box {
   width: 70%;
   text-align: center;
-  border: 2px solid #000000; /* Цвет рамки */
-  border-radius: 10px; /* Скругление углов */
-  padding: 20px; /* Внутренние отступы вокруг списка */
-  background-color: #f9f9f9; /* Цвет фона внутри рамки */
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2); /* Тень для глубины */
+  border: 2px solid #000000;
+  border-radius: 10px;
+  padding: 20px;
+  background-color: #f9f9f9;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
 }
 
 .methods-list {
-  list-style-type: none; /* Убираем маркеры списка */
-  padding: 0; /* Убираем отступы */
+  list-style-type: none;
+  padding: 0;
 }
 
 .methods-list li {
-  margin: 10px 0; /* Отступы между элементами списка */
+  margin: 10px 0;
 }
 
 .methods-list a {
-  text-decoration: none; /* Убираем подчеркивание */
-  color: #000000; /* Цвет ссылок */
-  font-weight: bold; /* Жирный текст для ссылок */
+  text-decoration: none;
+  color: #000000;
+  font-weight: bold;
 }
 
 .methods-list a:hover {
-  text-decoration: underline; /* Подчеркивание при наведении */
+  text-decoration: underline;
 }
 </style>
