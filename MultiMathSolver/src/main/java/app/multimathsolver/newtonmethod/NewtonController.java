@@ -31,8 +31,11 @@ public class NewtonController {
                 parsedNumbers.add(Double.parseDouble(approximation[i]));
             }
             result = newtonService.solve_by_fixed_point_iterations(systemId, numberOfUnknowns, parsedNumbers).toString();
-        } catch (Exception e) {
-            return new ResponseEntity<>("Введены некорректные данные!", HttpStatus.BAD_REQUEST);
+        } catch (ArithmeticException e) {
+            return new ResponseEntity<>("Невозможно высчитать ответ!", HttpStatus.BAD_REQUEST);
+        }
+        catch (IllegalArgumentException e){
+            return new ResponseEntity<>("Количество значений начальных приближений не совпадает с тем, что вы задали!", HttpStatus.BAD_REQUEST);
         }
         return new ResponseEntity<>(result, HttpStatus.OK);
     }

@@ -14,6 +14,7 @@ export default {
       initialApproximations: "",
       results: "",
       items: [],
+      variableNames: ["X", "Y", "Z"],
       SNAEF1: '../../public/СНАУ1.PNG',
       SNAEF2: '../../public/СНАУ2.PNG',
       SNAEF3: '../../public/СНАУ3.PNG',
@@ -108,7 +109,7 @@ export default {
         <h3>Результаты:</h3>
         <ul>
           <li v-for="(item, index) in items" :key="index">
-            X{{ index + 1 }}: {{ item.trim() }}
+            {{variableNames[index]}}: {{ item.trim() }}
           </li>
         </ul>
       </div>
