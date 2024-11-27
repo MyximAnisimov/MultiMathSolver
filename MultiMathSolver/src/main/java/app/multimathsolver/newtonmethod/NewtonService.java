@@ -19,7 +19,7 @@ class NewtonService {
         }
 
         // Остальная часть кода
-        List<Function<List<Double>, Double>> functions = SNAEFunctions.get_functions(system_id);
+        List<Function<List<Double>, Double>> functions = SNAEFunctions.getFunctions(system_id);
         List<List<Double>> jacobianMatrix;
         List<Double> fValues;
         List<Double> deltaX = new ArrayList<>(Collections.nCopies(number_of_unknowns, 1.0));

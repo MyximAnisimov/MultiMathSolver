@@ -10,7 +10,7 @@ import lombok.ToString;
 @Setter
 @ToString
 @NoArgsConstructor
-public class CholetskyDAO {
+public class CholetskyDTO {
 
     private int size;
 

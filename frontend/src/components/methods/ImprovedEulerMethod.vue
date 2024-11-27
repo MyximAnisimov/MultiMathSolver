@@ -1,29 +1,29 @@
 <script>
-import ButtonRegLog from "@/components/Button.vue";
+import ButtonRegLog from "@/components/button/Button.vue";
 import apiClient from "@/main.js";
 import { notify } from "@kyvg/vue3-notification";
-import ResultDisplay from "@/components/ResultDisplay.vue";
 export default {
 
-  components: { ResultDisplay, ButtonRegLog },
+  components: { ButtonRegLog },
   data() {
     return {
       minValue: 0.0,
       maxValue: 0.0,
-      functionNumbers: [1, 2, 3, 4, 5],
+      numberOfFunction: [1, 2, 3, 4],
+      selectedFunction: null,
       epsilon: 0.0,
+      y_a: 0.0,
       result: "",
       items: [],
-      simpsonIntegral1: '../../public/SimpsonIntegral1.PNG',
-      simpsonIntegral2: '../../public/SimpsonIntegral2.PNG',
-      simpsonIntegral3: '../../public/SimpsonIntegral3.PNG',
-      simpsonIntegral4: '../../public/SimpsonIntegral4.PNG',
-      simpsonIntegral5: '../../public/SimpsonIntegral5.PNG'
+      eulerEquation1: '../../public/Euler1.PNG',
+      eulerEquation2: '../../public/Euler2.PNG',
+      eulerEquation3: '../../public/Euler3.PNG',
+      eulerEquation4: '../../public/Euler4.PNG'
 
     };
   },
   methods: {
-    sendSimpsonMethod(e) {
+    sendEulerMethod(e) {
       e.preventDefault();
       const token = localStorage.getItem("jwt");
       if (!token) {
@@ -34,8 +34,9 @@ export default {
       apiClient.put('http://localhost:8080/api/euler', {
         minValue: this.minValue,
         maxValue: this.maxValue,
-        functionNumbers: this.functionNumbers,
-        epsilon: this.epsilon
+        numberOfFunction: this.selectedFunction,
+        epsilon: this.epsilon,
+        y_a: this.y_a
       }, {
         headers: {
           "Authorization": "Bearer " + token,
@@ -69,37 +70,43 @@ export default {
 
 <template>
   <section class="main">
+    <header class="header">
+      <router-link to="/main" class="header-title">
+        <h1 id="header-title">Multi math solver</h1>
+      </router-link>
+    </header>
     <div id="content">
-      <h1 class="title">Улучшенный метод Эйлера</h1>
+      <h3 class="title">Улучшенный метод Эйлера</h3>
       <div class="form-container">
         <form id="forms">
           <div>
-            <h4>Доступные для решения интегралы</h4>
-            <img id="integral" :src="simpsonIntegral1" alt="Система 1" />
-            <img id="integral" :src="simpsonIntegral2" alt="Система 2" />
-            <img id="integral" :src="simpsonIntegral3" alt="Система 3" />
-            <img id="integral" :src="simpsonIntegral4" alt="Система 4" />
-            <img id="integral" :src="simpsonIntegral5" alt="Система 4" />
+            <h4>Доступные для решения уравнения</h4>
+            <img id="integral" :src="eulerEquation1" alt="Система 1" />
+            <img id="integral" :src="eulerEquation2" alt="Система 2" />
+            <img id="integral" :src="eulerEquation3" alt="Система 3" />
+            <img id="integral" :src="eulerEquation4" alt="Система 4" />
           </div>
-          <label for="function-id">Введите номер интеграла</label>
-          <select id="function-id" v-model="functionNumbers">
-            <option v-for="number in functionNumbers" :key="number" :value="number">
+          <label for="function-id">Введите номер уравнения</label>
+          <select id="function-id" v-model="selectedFunction">
+            <option v-for="number in numberOfFunction" :key="number" :value="number">
               {{ number }}
             </option>
           </select>
           <label for="a-value">Введите значение а</label>
-          <textarea id="a-value" v-model="minValue"></textarea>
+          <textarea id="a-value" class="no-resize" v-model="minValue"></textarea>
           <label for="b-value">Введите значение b</label>
-          <textarea id="b-value" v-model="maxValue"></textarea>
+          <textarea id="b-value" class="no-resize" v-model="maxValue"></textarea>
+          <label for="y_a">Введите значение функции y(a)</label>
+          <input id="y_a" v-model="y_a">
           <label for="epsilon">Введите значение приближения epsilon</label>
           <input id="epsilon" v-model="epsilon">
-          <ButtonRegLog color="white" style="color: black" label="Отправить данные" @click="sendSimpsonMethod"/>
+
+          <ButtonRegLog color="white" style="color: black" label="Отправить данные" @click="sendEulerMethod"/>
         </form>
       </div>
 
-      <ResultDisplay id="results" :results="result" />
-      <div class="result-container" id="results">
-        <h3>Результаты</h3>
+      <div class="result-container" id="results" v-if="result.length > 0">
+        <h3>Результат</h3>
         {{result}}
       </div>
     </div>
@@ -109,16 +116,21 @@ export default {
 <style scoped>
 .title {
   text-align: center;
-  font-size: 2em;
+  font-size: 1.5em;
   margin-bottom: 20px;
+}
+.header{
+  text-align: center;
+  border-radius: 5px;
+  font-size: 1.4em;
 }
 
 .form-container {
-  border: 2px solid #ccc;
-  border-radius: 5px;
+  border-radius: 10px;
   padding: 20px;
   max-width: 600px;
-  margin: 0 auto;
+  margin: 10px auto;
+  box-shadow: 0 5px 15px #181818;
 }
 
 #function-id {
@@ -137,24 +149,27 @@ textarea {
   margin-bottom: 20px;
   margin-top: 20px;
 }
+.no-resize {
+  resize: none;
+}
+
 #b-value{
   width: 100%;
   margin-bottom: 20px;
   margin-top: 20px;
 }
-
-#results {
-  border: 2px solid #ccc;
-  border-radius: 5px;
-  padding: 20px;
-  max-width: 600px;
-  margin: 20px;
+#y_a{
+  width: 100%;
+  margin-bottom: 20px;
+  margin-top: 20px;
 }
+
 .result-container {
   margin-top: 20px;
+  margin-bottom: 20px;
+  box-shadow: 0 5px 15px #181818;
   padding: 15px;
-  border: 2px solid #ccc;
-  border-radius: 5px;
+  border-radius: 10px;
   background-color: #f9f9f9;
   word-wrap: break-word;
   overflow-wrap: break-word;

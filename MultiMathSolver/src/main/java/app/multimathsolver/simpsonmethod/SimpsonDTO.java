@@ -9,7 +9,7 @@ import lombok.ToString;
 @Setter
 @ToString
 @NoArgsConstructor
-public class SimpsonDAO {
+public class SimpsonDTO {
 
     private Long Id;
 
@@ -21,5 +21,5 @@ public class SimpsonDAO {
 
     private double epsilon;
 
-    private String result;
+//    private String result;
 }

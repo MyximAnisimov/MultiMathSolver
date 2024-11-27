@@ -1,4 +1,4 @@
-package app.multimathsolver.user;
+package app.multimathsolver.user.dto;
 
 import lombok.Data;
 

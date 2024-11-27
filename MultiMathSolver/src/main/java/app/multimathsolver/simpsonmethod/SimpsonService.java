@@ -11,47 +11,47 @@ class SimpsonService {
     public static String error_message = "";
     public static boolean has_discontinuity = false;
 
-    private static double first_function(double x) {
+    private static double firstFunction(double x) {
         return 1 / x;
     }
 
-    private static double second_function(double x) {
+    private static double secondFunction(double x) {
         return sin(x) / x;
     }
 
-    private static double third_function(double x) {
+    private static double thirdFunction(double x) {
         return x * x + 2;
     }
 
-    private static double fourth_function(double x) {
+    private static double fourthFunction(double x) {
         return 2 * x + 2;
     }
 
-    private static double five_function(double x) {
+    private static double fiveFunction(double x) {
         return log(x);
     }
 
-    private static Function<Double, Double> get_function(int n) {
+    private static Function<Double, Double> getFunction(int n) {
         switch (n) {
             case (1):
-                return SimpsonService::first_function;
+                return SimpsonService::firstFunction;
             case (2):
-                return SimpsonService::second_function;
+                return SimpsonService::secondFunction;
             case (3):
-                return SimpsonService::third_function;
+                return SimpsonService::thirdFunction;
             case (4):
-                return SimpsonService::fourth_function;
+                return SimpsonService::fourthFunction;
             case (5):
-                return SimpsonService::five_function;
+                return SimpsonService::fiveFunction;
             default:
                 throw new UnsupportedOperationException("Function " + n + " not defined.");
         }
     }
 
-    public double calculate_integral(double a, double b, int f, double epsilon) {
+    public double calculateIntegral(double a, double b, int f, double epsilon) {
         SimpsonService.has_discontinuity = false;
 
-        Function<Double, Double> func = get_function(f);
+        Function<Double, Double> func = getFunction(f);
 
         if (Double.isNaN(func.apply(a)) || Double.isNaN(func.apply(b))||  Double.isInfinite(func.apply(a)) || Double.isInfinite(func.apply(b))) {
             SimpsonService.has_discontinuity = true;

@@ -1,6 +1,7 @@
-package app.multimathsolver.user;
+package app.multimathsolver.security;
 
-import app.multimathsolver.jwt.JwtFilter;
+import app.multimathsolver.security.jwt.JwtFilter;
+import app.multimathsolver.user.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

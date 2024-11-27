@@ -1,17 +1,18 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import Registration from "@/components/Registration.vue";
-import MainPage from "@/components/MainPage.vue";
-import RegistrationError from "@/components/RegistrationError.vue";
-import CholetskyMethod from "@/components/CholetskyMethod.vue";
-import SimpsonMethod from "@/components/SimpsonMethod.vue";
-import ImprovedEulerMethod from "@/components/ImprovedEulerMethod.vue";
-import NewtonMethod from "@/components/NewtonMethod.vue";
+import Registration from "@/components/registration/Registration.vue";
+import MainPage from "@/components/main/MainPage.vue";
+import RegistrationError from "@/components/registration/RegistrationError.vue";
+import CholetskyMethod from "@/components/methods/CholetskyMethod.vue";
+import SimpsonMethod from "@/components/methods/SimpsonMethod.vue";
+import ImprovedEulerMethod from "@/components/methods/ImprovedEulerMethod.vue";
+import NewtonMethod from "@/components/methods/NewtonMethod.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
+
     {
-      path: '/auth',
+      path: '/',
       name: 'auth',
       component: Registration,
     },

@@ -1,6 +1,5 @@
 package app.multimathsolver.newtonmethod;
 
-import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -10,7 +9,7 @@ import lombok.ToString;
 @Setter
 @ToString
 @NoArgsConstructor
-public class NewtonDAO {
+public class NewtonDTO {
 
     private Long id;
 
@@ -20,5 +19,5 @@ public class NewtonDAO {
 
     private String initialApproximation;
 
-    private String result;
+//    private String result;
 }

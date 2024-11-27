@@ -1,7 +1,7 @@
 package app.multimathsolver.choletskymethod;
 
-import app.multimathsolver.jwt.JwtFilter;
-import app.multimathsolver.jwt.JwtUtils;
+import app.multimathsolver.security.jwt.JwtFilter;
+import app.multimathsolver.security.jwt.JwtUtils;
 import app.multimathsolver.user.User;
 import app.multimathsolver.user.UserRepository;
 import jakarta.servlet.http.HttpServletRequest;
@@ -37,7 +37,7 @@ public class CholetskyController {
     }
 
     @PutMapping(path = "/choletsky", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<String> calculateCholetsky(@Valid @RequestBody CholetskyDAO input, HttpServletRequest request){
+    public ResponseEntity<String> calculateCholetsky(@Valid @RequestBody CholetskyDTO input, HttpServletRequest request){
         //Вынести парсер в отдельный метод или класс
         String convertedResult = "";
         User user = userRepository.findByEmail(jwtUtils.getUserNameFromJwtToken(jwtFilter.parseJwt(request)));

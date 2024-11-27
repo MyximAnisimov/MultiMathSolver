@@ -1,19 +1,13 @@
 package app.multimathsolver.improvedeulermethod;
 
-import jakarta.persistence.Column;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
-import java.util.ArrayList;
-import java.util.List;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping(path = "/api")
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class ImprovedEulerMethodController {
     private ImprovedEulerMethodService improvedEulerMethodService;
 
@@ -22,7 +16,7 @@ public class ImprovedEulerMethodController {
     }
 
     @PutMapping(path = "/euler", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Double> calculateCholetsky(@RequestBody ImprovedEulerMethodDAO input){
+    public ResponseEntity<Double> calculateCholetsky(@RequestBody ImprovedEulerMethodDTO input){
         double result;
         try {
             int numberOfFunction = input.getNumberOfFunction();

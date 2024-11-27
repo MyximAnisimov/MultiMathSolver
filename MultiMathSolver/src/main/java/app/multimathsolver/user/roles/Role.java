@@ -1,9 +1,7 @@
-package app.multimathsolver.user;
+package app.multimathsolver.user.roles;
 
 import jakarta.persistence.*;
 import lombok.Data;
-
-import java.util.List;
 
 @Entity
 @Data

@@ -1,15 +1,16 @@
 <script>
-import ButtonRegLog from "@/components/Button.vue";
+import ButtonRegLog from "@/components/button/Button.vue";
 import apiClient from "@/main.js";
 import { notify } from "@kyvg/vue3-notification";
-import ResultDisplay from "@/components/ResultDisplay.vue";
+
 export default {
 
-  components: { ResultDisplay, ButtonRegLog },
+  components: { ButtonRegLog },
   data() {
     return {
       systemId: 0,
       systemNumbers: [1, 2, 3, 4],
+      selectedNumber: null,
       numberOfUnknowns: 0,
       initialApproximations: "",
       results: "",
@@ -40,7 +41,7 @@ export default {
       }
 
       apiClient.put('http://localhost:8080/api/newton', {
-        systemId: this.systemId,
+        systemId: this.selectedNumber,
         numberOfUnknowns: this.numberOfUnknowns,
         initialApproximation: this.initialApproximations
       }, {
@@ -79,12 +80,17 @@ export default {
 
 <template>
   <section class="main">
+    <header class="header">
+      <router-link to="/main" class="header-title">
+        <h1 id="header-title">Multi math solver</h1>
+      </router-link>
+    </header>
     <div id="content">
-      <h1 class="title">Метод Ньютона</h1>
+      <h3 class="title">Метод Ньютона</h3>
       <div class="form-container">
         <form id="forms">
           <label for="system-id">Введите номер системы</label>
-          <select id="system-id" v-model="systemId">
+          <select id="system-id" v-model="selectedNumber">
             <option v-for="number in systemNumbers" :key="number" :value="number">
               {{ number }}
             </option>
@@ -104,8 +110,7 @@ export default {
         </form>
       </div>
 
-      <ResultDisplay id="results" :results="results" />
-      <div class="result-container" id="results" v-if="items.length > 0">
+      <div class="result-container" id="results" v-if="results.length > 0">
         <h3>Результаты:</h3>
         <ul>
           <li v-for="(item, index) in items" :key="index">
@@ -120,16 +125,20 @@ export default {
 <style scoped>
 .title {
   text-align: center;
-  font-size: 2em;
+  font-size: 1.5em;
   margin-bottom: 20px;
 }
 
+#header-title{
+  font-size: 2em;
+  margin-bottom: 20px
+}
 .form-container {
-  border: 2px solid #ccc;
-  border-radius: 5px;
+  border-radius: 10px;
   padding: 20px;
   max-width: 600px;
-  margin: 0 auto;
+  margin: 10px auto;
+  box-shadow: 0 5px 15px #181818;
 }
 
 #system-id {
@@ -146,19 +155,16 @@ textarea {
 .no-resize {
   resize: none;
 }
-
-#results {
-  border: 2px solid #ccc;
+.header{
+  text-align: center;
   border-radius: 5px;
-  padding: 20px;
-  max-width: 600px;
-  margin: 20px;
 }
 .result-container {
   margin-top: 20px;
+  margin-bottom: 20px;
   padding: 15px;
-  border: 2px solid #ccc;
-  border-radius: 5px;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px #181818;
   background-color: #f9f9f9;
   word-wrap: break-word;
   overflow-wrap: break-word;

@@ -1,6 +1,6 @@
 <template>
   <div id="content">
-    <h1 class="greeting">Добро пожаловать на сайт-решатор по математике :)</h1>
+    <h1 class="greeting">Добро пожаловать на сайт-решатор по математике</h1>
 
     <div class="form-container">
       <form id="form">
@@ -33,7 +33,7 @@
 </template>
 
 <script>
-import ButtonRegLog from "@/components/Button.vue";
+import ButtonRegLog from "@/components/button/Button.vue";
 import { notify } from "@kyvg/vue3-notification";
 import apiClient from "@/main.js";
 
@@ -128,7 +128,7 @@ export default {
   font-size: 20px;
   flex-direction: column;
   margin: auto;
-  border-radius: 20px;
+  border-radius: 10px;
   padding: 20px;
   box-shadow: 0 0 10px 1px black;
 }

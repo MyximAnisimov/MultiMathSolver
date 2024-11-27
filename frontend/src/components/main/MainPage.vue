@@ -3,7 +3,6 @@
     <h2 class="welcome-message">Ниже представлены методы, которые вы можете решить с помощью нашего сайта</h2>
 
     <div class="methods-container">
-      <h3 class="methods-title">Выберите метод</h3>
       <div class="methods-box">
         <ul class="methods-list">
           <li><router-link to="/choletsky">Метод Холецкого</router-link></li>
@@ -34,19 +33,14 @@
   height: calc(100vh - 80px);
 }
 
-.methods-title {
-  font-size: 1.5em;
-  margin: 10px 0;
-}
 
 .methods-box {
   width: 70%;
   text-align: center;
-  border: 2px solid #000000;
   border-radius: 10px;
   padding: 20px;
   background-color: #f9f9f9;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 5px 15px #181818;
 }
 
 .methods-list {

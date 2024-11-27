@@ -19,7 +19,7 @@ public class NewtonController {
     }
 
     @PutMapping(path = "/newton", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<String> calculateNewton(@RequestBody NewtonDAO input) {
+    public ResponseEntity<String> calculateNewton(@RequestBody NewtonDTO input) {
         String result;
         try {
             int systemId = input.getSystemId();
@@ -35,7 +35,7 @@ public class NewtonController {
             return new ResponseEntity<>("Невозможно высчитать ответ!", HttpStatus.BAD_REQUEST);
         }
         catch (IllegalArgumentException e){
-            return new ResponseEntity<>("Количество значений начальных приближений не совпадает с тем, что вы задали!", HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>("Данные введены некорректно!", HttpStatus.BAD_REQUEST);
         }
         return new ResponseEntity<>(result, HttpStatus.OK);
     }

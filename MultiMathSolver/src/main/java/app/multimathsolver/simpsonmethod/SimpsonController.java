@@ -17,7 +17,7 @@ public class SimpsonController {
     }
 
     @PutMapping(path = "/simpson", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<String> calculateSimpson(@RequestBody SimpsonDAO input){
+    public ResponseEntity<String> calculateSimpson(@RequestBody SimpsonDTO input){
         double result;
 
         try {
@@ -26,7 +26,7 @@ public class SimpsonController {
             int numberOfFunction = input.getFunctionNumbers();
             double epsilon = input.getEpsilon();
 
-            result = simpsonService.calculate_integral(aValue, bValue, numberOfFunction, epsilon);
+            result = simpsonService.calculateIntegral(aValue, bValue, numberOfFunction, epsilon);
         }
         catch(Exception e){
             return new ResponseEntity<>("Невозможно вычислить интеграл!", HttpStatus.BAD_REQUEST);

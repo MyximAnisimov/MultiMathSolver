@@ -1,7 +1,11 @@
 package app.multimathsolver.user;
 
-import app.multimathsolver.jwt.JwtUtils;
+import app.multimathsolver.security.jwt.JwtUtils;
 import app.multimathsolver.kafka.UserRegisteredEvent;
+import app.multimathsolver.user.dto.AuthDTO;
+import app.multimathsolver.user.dto.LoginDTO;
+import app.multimathsolver.user.roles.Role;
+import app.multimathsolver.user.roles.RoleRepository;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,9 +45,9 @@ public class UserController {
     private AuthenticationManager authenticationManager;
 
     @PostMapping(path = "/registration", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<HttpStatus> registration(@RequestBody AuthDTO authDTO) throws JsonProcessingException {
+    public ResponseEntity<String> registration(@RequestBody AuthDTO authDTO) throws JsonProcessingException {
         if(userRepository.existsByEmail(authDTO.getEmail())){
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>("Пользователь с таким именем уже существует!", HttpStatus.BAD_REQUEST);
         }
        User user = new User();
        user.setEmail(authDTO.getEmail());
@@ -57,7 +61,7 @@ public class UserController {
 
         String json = new ObjectMapper().writeValueAsString(event);
         kafkaTemplate.send("registration", json);
-       return new ResponseEntity<>(HttpStatus.OK);
+       return new ResponseEntity<>("Пользователь зарегистрирован!", HttpStatus.OK);
     }
 
     @PostMapping(path = "/login", produces = MediaType.APPLICATION_JSON_VALUE)

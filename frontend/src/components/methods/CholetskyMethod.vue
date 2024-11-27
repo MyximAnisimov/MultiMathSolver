@@ -1,11 +1,10 @@
 <script>
-import ButtonRegLog from "@/components/Button.vue";
+import ButtonRegLog from "@/components/button/Button.vue";
 import apiClient from "@/main.js";
 import { notify } from "@kyvg/vue3-notification";
-import ResultDisplay from "@/components/ResultDisplay.vue";
 
 export default {
-  components: { ResultDisplay, ButtonRegLog },
+  components: { ButtonRegLog },
   data() {
     return {
       size: "",
@@ -73,6 +72,11 @@ export default {
 
 <template>
   <section class="main">
+    <header class="header">
+      <router-link to="/main" class="header-title">
+        <h1 id="header-title">Multi math solver</h1>
+      </router-link>
+    </header>
     <div id="content">
       <h1 class="title">Метод Холецкого</h1>
       <div class="form-container">
@@ -102,16 +106,25 @@ export default {
 <style scoped>
 .title {
   text-align: center;
-  font-size: 2em;
+  font-size: 1.5em;
   margin-bottom: 20px;
 }
 
-.form-container {
-  border: 2px solid #ccc;
+#header-title{
+  font-size: 2em;
+  margin-bottom: 20px
+}
+.header{
+  text-align: center;
   border-radius: 5px;
+}
+
+.form-container {
+  border-radius: 10px;
   padding: 20px;
   max-width: 600px;
-  margin: 0 auto;
+  margin: 10px auto;
+  box-shadow: 0 5px 15px #181818;
 }
 
 #matrix-size {
@@ -129,22 +142,17 @@ textarea {
   resize: none;
 }
 
-#results {
-  border: 2px solid #ccc;
-  border-radius: 5px;
-  padding: 20px;
-  max-width: 600px;
-  margin: 20px;
-}
 .result-container {
   margin-top: 20px;
+  margin-bottom: 20px;
   padding: 15px;
-  border: 2px solid #ccc;
   border-radius: 5px;
   background-color: #f9f9f9;
   word-wrap: break-word;
   overflow-wrap: break-word;
   white-space: normal;
+  box-shadow: 0 5px 15px #181818;
+  max-width: 600px;
 }
 
 .result-container h3 {

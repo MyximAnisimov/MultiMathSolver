@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-//Обязательно проверить правильность данных
 @Service
 class CholetskyService {
 
@@ -207,7 +206,6 @@ class CholetskyService {
         Double[] vectorX = getCalculatedVector(matrixC, vectorY);
 
         List<Double> result = new ArrayList<>();
-//        result.addAll(Arrays.stream(vectorY).toList());
         result.addAll(Arrays.stream(vectorX).toList());
         return result;
     }

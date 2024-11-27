@@ -1,4 +1,4 @@
-package app.multimathsolver.jwt;
+package app.multimathsolver.security.jwt;
 
 import app.multimathsolver.user.UserDetailsServiceImpl;
 import io.jsonwebtoken.io.IOException;

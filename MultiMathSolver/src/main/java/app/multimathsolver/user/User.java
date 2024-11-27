@@ -1,5 +1,6 @@
 package app.multimathsolver.user;
 
+import app.multimathsolver.user.roles.Role;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -7,8 +8,6 @@ import lombok.Setter;
 import lombok.ToString;
 import org.springframework.data.annotation.Id;
 
-import java.io.Serializable;
-import java.util.List;
 import java.util.Set;
 
 @Entity
